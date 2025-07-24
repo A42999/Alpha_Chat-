@@ -1,7 +1,7 @@
 {
   "name": "alpha-chat-app",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -28,5 +28,12 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "not < 0.5%",
+    "Chrome >= 60",
+    "Safari >= 10"
+  ]
 }
