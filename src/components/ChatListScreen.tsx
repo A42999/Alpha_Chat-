@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, MoreVertical, Plus } from 'lucide-react'
+import { Search, MoreVertical } from 'lucide-react'
 import BottomNavigation from './BottomNavigation'
 
 const ChatListScreen: React.FC = () => {
@@ -67,7 +67,7 @@ const ChatListScreen: React.FC = () => {
             <div className="w-1 h-3 bg-gray-400 rounded-full"></div>
           </div>
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.24 0 1 1 0 01-1.415-1.415 5 5 0 017.07 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+            <path fillRule="evenodd" d="..." clipRule="evenodd" />
           </svg>
           <div className="w-6 h-3 bg-black rounded-sm"></div>
         </div>
@@ -76,8 +76,8 @@ const ChatListScreen: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-3">
-          <div className="w-4 h-4 rounded-full flex items-center justify-center">
-            <span className="text-alpha-light-blue text-sm font-bold">α</span>
+          <div className="w-[15px] h-[15px] rounded-full flex items-center justify-center">
+            <span className="text-[#4F9DE8] text-xs font-bold">α</span>
           </div>
           <h1 className="text-xl font-semibold text-gray-800">Alpha Chat</h1>
         </div>
@@ -109,9 +109,9 @@ const ChatListScreen: React.FC = () => {
               <button className="w-full text-left px-4 py-2 hover:bg-gray-50 text-gray-700">Starred Messages</button>
               <button onClick={() => navigate('/profile')} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-gray-700">Settings</button>
             </div>
-            </div>
           </div>
         </div>
+      </div>
 
       {/* Chat List */}
       <div className="flex-1 px-6">
@@ -122,11 +122,11 @@ const ChatListScreen: React.FC = () => {
             className="flex items-center space-x-4 py-4 cursor-pointer hover:bg-gray-50 rounded-lg px-2 -mx-2"
           >
             <div className="relative">
-              <div className="w-12 h-12 rounded-full p-1 bg-gradient-to-r from-alpha-light-blue to-alpha-light-blue">
+              <div className="w-12 h-12 rounded-full p-2 bg-gradient-to-r from-[#4F9DE8] to-[#4F9DE8]">
                 <img
                   src={chat.avatar}
                   alt={chat.name}
-                  className="w-full h-full rounded-full object-cover border-2 border-white"
+                  className="w-full h-full rounded-full object-cover border-4 border-white"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ const ChatListScreen: React.FC = () => {
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-500">{chat.time}</span>
                   {chat.unread && (
-                    <div className="w-2 h-2 bg-alpha-light-blue rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#4F9DE8] rounded-full"></div>
                   )}
                 </div>
               </div>
