@@ -1,162 +1,234 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Share2, UserPlus, Users, VolumeX, Settings, Shield, Bell, Moon, HelpCircle, LogOut, Camera, QrCode, Key, Database, Globe, Heart, Info } from 'lucide-react'
+import {
+  ArrowLeft, QrCode, Share2, Settings, Bell, Shield, Database,
+  HelpCircle, Info, LogOut, Smartphone, Globe2, Wallpaper,
+  MessageSquare, UserPlus
+} from 'lucide-react'
 
 const ProfileScreen: React.FC = () => {
   const navigate = useNavigate()
+  const [addedContact, setAddedContact] = useState<string | null>(
+    localStorage.getItem('qrContact')
+  )
 
-  // WhatsApp style profile sections
-  const profileActions = [
-    { 
-      icon: Share2, 
-      label: 'Share Profile', 
-      action: () => {
-        const confirmed = window.confirm('Share your profile with others?')
-        if (confirmed) {
-          // Share profile logic
-        }
-      }
+  // Simulated QR scan handler (WeChat style)
+  const handleQRScan = () => {
+    const contactName = prompt('Scan successful! Add contact named:')
+    if (contactName) {
+      localStorage.setItem('qrContact', contactName)
+      setAddedContact(contactName)
+      alert(`"${contactName}" added to your contact list ✅`)
+    }
+  }
+
+  const quickActions = [
+    {
+      icon: QrCode,
+      label: 'QR Code',
+      action: handleQRScan
     },
-    { 
-      icon: QrCode, 
-      label: 'QR Code', 
-      action: () => {
-        const confirmed = window.confirm('Add this contact to your chat?')
-        if (confirmed) {
-          // QR code logic - add contact
-        }
-      }
-    },
+    {
+      icon: Share2,
+      label: 'Share Profile',
+      action: () => alert('Profile shared!')
+    }
   ]
 
-  // Instagram style settings
-  const accountSettings = [
-    { icon: Settings, label: 'Account', subtitle: 'Security, privacy, personal details', action: () => {} },
-    { icon: Bell, label: 'Notifications', subtitle: 'Messages, group & call tones', action: () => {} },
-    { icon: Shield, label: 'Privacy', subtitle: 'Block contacts, disappearing messages', action: () => {} },
-    { icon: Database, label: 'Storage and Data', subtitle: 'Network usage, auto-download', action: () => {} },
-  ]
-
-  const supportSettings = [
-    { icon: HelpCircle, label: 'Help', subtitle: 'Help center, contact us, privacy policy', action: () => {} },
-    { icon: Heart, label: 'Tell a Friend', subtitle: 'Share Alpha Chat with friends', action: () => {} },
-    { icon: Info, label: 'About', subtitle: 'Terms, privacy policy, app info', action: () => {} },
+  const settings = [
+    {
+      section: 'Account',
+      items: [
+        {
+          icon: Settings,
+          label: 'Security',
+          subtitle: 'Two-step verification',
+          action: () => alert('Open Security Settings')
+        },
+        {
+          icon: Smartphone,
+          label: 'Change Number',
+          subtitle: 'Transfer to new number',
+          action: () => alert('Change number flow started')
+        }
+      ]
+    },
+    {
+      section: 'Chats',
+      items: [
+        {
+          icon: Wallpaper,
+          label: 'Wallpaper',
+          subtitle: 'Change chat background',
+          action: () => alert('Wallpaper picker opened')
+        },
+        {
+          icon: MessageSquare,
+          label: 'Backup',
+          subtitle: 'Chat backup settings',
+          action: () => alert('Backup screen opened')
+        }
+      ]
+    },
+    {
+      section: 'Notifications',
+      items: [
+        {
+          icon: Bell,
+          label: 'Sounds & Alerts',
+          subtitle: 'Tone, vibration, popup',
+          action: () => alert('Notification settings opened')
+        }
+      ]
+    },
+    {
+      section: 'Privacy',
+      items: [
+        {
+          icon: Shield,
+          label: 'Privacy Settings',
+          subtitle: 'Last seen, groups, read receipts',
+          action: () => alert('Privacy settings opened')
+        }
+      ]
+    },
+    {
+      section: 'Storage & Data',
+      items: [
+        {
+          icon: Database,
+          label: 'Storage Usage',
+          subtitle: 'Manage space & downloads',
+          action: () => alert('Storage screen opened')
+        }
+      ]
+    },
+    {
+      section: 'Linked Devices',
+      items: [
+        {
+          icon: Smartphone,
+          label: 'Manage Devices',
+          subtitle: 'View logged-in devices',
+          action: () => alert('Linked devices list opened')
+        }
+      ]
+    },
+    {
+      section: 'App Settings',
+      items: [
+        {
+          icon: Globe2,
+          label: 'Language',
+          subtitle: 'Change app language',
+          action: () => alert('Language selection opened')
+        },
+        {
+          icon: UserPlus,
+          label: 'Invite Friends',
+          subtitle: 'Share Alpha Chat with contacts',
+          action: () => alert('Invite link shared')
+        }
+      ]
+    },
+    {
+      section: 'Support',
+      items: [
+        {
+          icon: HelpCircle,
+          label: 'Help',
+          subtitle: 'FAQs & contact support',
+          action: () => alert('Help screen opened')
+        },
+        {
+          icon: Info,
+          label: 'About',
+          subtitle: 'App info, terms, privacy',
+          action: () => alert('About screen opened')
+        }
+      ]
+    }
   ]
 
   return (
-    <div className="mobile-container">
-      {/* Status Bar */}
-      <div className="status-bar">
-        <span>9:41</span>
-        <div className="flex items-center space-x-1">
-          <div className="flex space-x-1">
-            <div className="w-1 h-3 bg-black rounded-full"></div>
-            <div className="w-1 h-3 bg-black rounded-full"></div>
-            <div className="w-1 h-3 bg-black rounded-full"></div>
-            <div className="w-1 h-3 bg-gray-400 rounded-full"></div>
-          </div>
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.24 0 1 1 0 01-1.415-1.415 5 5 0 017.07 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-          </svg>
-          <div className="w-6 h-3 bg-black rounded-sm"></div>
-        </div>
-      </div>
-
+    <div className="mobile-container bg-white min-h-screen pb-16">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-        <button onClick={() => navigate('/')} className="p-1">
-          <ArrowLeft className="w-6 h-6 text-gray-600" />
-        </button>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+        <button onClick={() => navigate('/')}><ArrowLeft className="w-6 h-6 text-gray-600" /></button>
         <h1 className="text-lg font-medium text-gray-900">Profile</h1>
-        <div className="w-8"></div>
+        <div className="w-6"></div>
       </div>
 
       {/* Profile Info */}
-      <div className="px-6 py-6 text-center bg-gray-50">
-        <div className="relative inline-block mb-4">
-          <button className="relative">
-            <img
-              src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200"
-              alt="Profile"
-              className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
-            />
-            <div className="absolute bottom-2 right-2 w-10 h-10 bg-ocean-blue rounded-full flex items-center justify-center border-3 border-white">
-              <Camera className="w-4 h-4 text-white" />
-            </div>
-          </button>
-        </div>
+      <div className="px-6 py-6 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-1">Rosie Anderson</h2>
         <p className="text-gray-600 mb-1">+1 234 567 8900</p>
-        <p className="text-sm text-ocean-blue font-medium">Available</p>
+        <p className="text-sm text-[#4F9DE8] font-medium">Hi, I’m using Alpha Chat</p>
       </div>
 
-      {/* Profile Options */}
+      {/* QR & Share */}
       <div className="px-6 mb-6">
-        <div className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
-          <div className="grid grid-cols-2 gap-4">
-            {profileActions.map((action, index) => (
-              <button key={index} onClick={action.action} className="flex flex-col items-center justify-center py-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
-                <action.icon className="w-7 h-7 text-ocean-blue mb-2" />
-                <span className="text-sm font-medium text-gray-700">{action.label}</span>
-              </button>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-4">
+          {quickActions.map((item, index) => (
+            <button key={index} onClick={item.action}
+              className="bg-gray-100 rounded-xl p-4 flex flex-col items-center hover:bg-gray-200 transition">
+              <item.icon className="w-6 h-6 text-[#4F9DE8] mb-2" />
+              <span className="text-sm text-gray-700 font-medium">{item.label}</span>
+            </button>
+          ))}
         </div>
       </div>
+
+      {/* Contact Added via QR */}
+      {addedContact && (
+        <div className="px-6 mb-6">
+          <div className="bg-gray-50 p-4 rounded-xl border">
+            <p className="text-sm text-gray-700">📇 Added Contact: <strong>{addedContact}</strong></p>
+            <p className="text-xs text-gray-500">via QR scan</p>
+          </div>
+        </div>
+      )}
 
       {/* Settings Sections */}
       <div className="px-6 space-y-6">
-        {/* Account Settings */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900">Account</h3>
-          </div>
-          <div className="divide-y divide-gray-100">
-            {accountSettings.map((option, index) => (
-              <button key={index} onClick={option.action} className="flex items-center w-full py-4 px-4 hover:bg-gray-50 transition-colors">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
-                  <option.icon className="w-6 h-6 text-ocean-blue" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-base font-medium text-gray-900">{option.label}</h4>
-                  <p className="text-sm text-gray-500">{option.subtitle}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Support Settings */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900">Support</h3>
-          </div>
-          <div className="divide-y divide-gray-100">
-            {supportSettings.map((option, index) => (
-              <button key={index} onClick={option.action} className="flex items-center w-full py-4 px-4 hover:bg-gray-50 transition-colors">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
-                  <option.icon className="w-6 h-6 text-ocean-blue" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-base font-medium text-gray-900">{option.label}</h4>
-                  <p className="text-sm text-gray-500">{option.subtitle}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Logout */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-          <button className="flex items-center w-full py-4 px-4 hover:bg-red-50 transition-colors">
-            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
-              <LogOut className="w-6 h-6 text-red-600" />
+        {settings.map((section, sIndex) => (
+          <div key={sIndex} className="bg-white rounded-xl shadow-sm">
+            <div className="px-4 py-3 border-b border-gray-100">
+              <h3 className="text-base font-semibold text-gray-800">{section.section}</h3>
             </div>
-            <div className="flex-1 text-left">
-              <h4 className="text-base font-medium text-red-600">Log Out</h4>
+            <div className="divide-y divide-gray-100">
+              {section.items.map((item, iIndex) => (
+                <button key={iIndex} onClick={item.action}
+                  className="flex items-center w-full py-4 px-4 hover:bg-gray-50">
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                    <item.icon className="w-5 h-5 text-[#4F9DE8]" />
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h4 className="text-sm font-medium text-gray-900">{item.label}</h4>
+                    <p className="text-xs text-gray-500">{item.subtitle}</p>
+                  </div>
+                </button>
+              ))}
             </div>
+          </div>
+        ))}
+
+        {/* Logout Button */}
+        <div className="bg-white rounded-xl overflow-hidden shadow-sm">
+          <button onClick={() => alert('Logged out')}
+            className="flex items-center w-full py-4 px-4 hover:bg-red-50">
+            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-4">
+              <LogOut className="w-5 h-5 text-red-600" />
+            </div>
+            <h4 className="text-sm font-medium text-red-600">Log Out</h4>
           </button>
         </div>
+      </div>
+
+      {/* Footer Brand */}
+      <div className="mt-8 text-center text-sm">
+        <span className="text-gray-400">from </span>
+        <span className="text-[#4F9DE8] font-semibold">El-Aenon</span>
       </div>
     </div>
   )
