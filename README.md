@@ -161,7 +161,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <strong>Made with ❤️ by u-aura</strong>
+  <strong>Made with ❤️ by el-aenon </strong>
   <br>
   <sub>⭐ Star this repo if you like it!</sub>
 </div>
