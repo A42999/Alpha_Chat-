@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Phone, Video, MoreVertical } from 'lucide-react'
 import BottomNavigation from './BottomNavigation'
-import injectCallAudio from './injectCallAudio' // New helper function
+import injectCallAudio from './injectCallAudio'
 
 const callTabs = ['All', 'Voice', 'Video', 'Missed']
 
@@ -45,7 +45,7 @@ const CallsScreen: React.FC = () => {
 
   const handleReplayAudioInjection = (call: any) => {
     injectCallAudio(call)
-    navigate('/updates') // Send user to Updates tab after injection
+    navigate('/updates')
   }
 
   return (
